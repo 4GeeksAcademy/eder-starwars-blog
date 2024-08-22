@@ -1,27 +1,80 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
-import { any } from "prop-types";
 
 export function CarouselItems() {
   const { store, actions } = useContext(Context);
   const cardsPerSlide = 5;
   const numberOfSlides = Math.ceil(store.characters.length / cardsPerSlide);
   let slideConstructInterval = [0, cardsPerSlide];
+  let dummyIterator = ["dummy"];
 
   useEffect(() => {
-    actions.loadSomeData();
-    /*  setInterval(() => {
+    actions.loadSomeData("people", "characters");
+    actions.loadSomeData("planets", "planets");
+    actions.loadSomeData("vehicles", "vehicles");
 
-      console.log(store.characters);
-      
-    }, 2000); */
+    /*  setInterval(() => {  
+        console.log(store.characters);        
+      }, 2000); */
   }, []);
 
-  const carouselSlide = () => {
-    let slides = [];
-    
+  const carouselEnsamble = () => {
+    return (
+      <div
+        id="carouselExampleFade"
+        className="carousel slide carousel-fade  mb-lg-4"
+        data-bs-ride="carousel"
+      >
+        <div className="carousel-inner">{carouselSlides()}</div>
+        <button
+          className="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleFade"
+          data-bs-slide="prev"
+        >
+          <span
+            className="carousel-control-prev-icon"
+            aria-hidden="true"
+          ></span>
+          <span className="visually-hidden">Previous</span>
+        </button>
+        <button
+          className="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleFade"
+          data-bs-slide="next"
+        >
+          <span
+            className="carousel-control-next-icon"
+            aria-hidden="true"
+          ></span>
+          <span className="visually-hidden">Next</span>
+        </button>
+      </div>
+    );
+  };
 
-    
+  const carouselSlides = () => {
+    let stage = [];
+    for (let index = 0; index < numberOfSlides; index++) {
+      const buildingSlide = dummyIterator.map((value, key) => {
+        return (
+          <div
+            className={`carousel-item ${
+              index == 0 ? "active" : ""
+            } d-flex justify-content-center`}
+          >
+            <div className="row row-cols-1 row-cols-md-5 rows-cols-lg-5 g-4">
+              {carouselCards()}
+            </div>
+          </div>
+        );
+      });
+      stage = [...stage, buildingSlide];
+      slideConstructInterval[0] = slideConstructInterval[0] + cardsPerSlide;
+      slideConstructInterval[1] = slideConstructInterval[1] + cardsPerSlide;
+    }
+    return stage;
   };
 
   const carouselCards = () => {
@@ -36,7 +89,7 @@ export function CarouselItems() {
             <img
               src={`https://starwars-visualguide.com/assets/img/characters/${value.uid}.jpg`}
               className="card-img-top img-thumbnail"
-              alt="..."
+              alt="Character Image"
             />
             <div className="card-body">
               <h5 className="card-title">Name</h5>
@@ -47,58 +100,196 @@ export function CarouselItems() {
     });
     return cardsInSlide;
   };
-  return (
-    <div
-      id="carouselExampleFade"
-      className="carousel slide carousel-fade"
-      data-bs-ride="carousel"
-    >
-      {carouselSlide()}
-      <button
-        className="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleFade"
-        data-bs-slide="prev"
-      >
-        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Previous</span>
-      </button>
-      <button
-        className="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleFade"
-        data-bs-slide="next"
-      >
-        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Next</span>
-      </button>
-    </div>
-  );
+  return carouselEnsamble();
 }
 
+/* Carousel Planets */
 
+export function CarouselPlanets() {
+  const { store, actions } = useContext(Context);
+  const cardsPerSlide = 5;
+  const numberOfSlides = Math.ceil(store.planets.length / cardsPerSlide);
+  let slideConstructInterval = [0, cardsPerSlide];
+  let dummyIterator = ["dummy"];
 
+  const carouselEnsamble = () => {
+    return (
+      <div
+        id="carouselExampleFade-Planets"
+        className="carousel slide carousel-fade mb-lg-4"
+        data-bs-ride="carousel"
+      >
+        <div className="carousel-inner">{carouselSlides()}</div>
+        <button
+          className="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleFade-Planets"
+          data-bs-slide="prev"
+        >
+          <span
+            className="carousel-control-prev-icon"
+            aria-hidden="true"
+          ></span>
+          <span className="visually-hidden">Previous</span>
+        </button>
+        <button
+          className="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleFade-Planets"
+          data-bs-slide="next"
+        >
+          <span
+            className="carousel-control-next-icon"
+            aria-hidden="true"
+          ></span>
+          <span className="visually-hidden">Next</span>
+        </button>
+      </div>
+    );
+  };
 
-
-<div className="carousel-inner">
-            <div
-              className={`carousel-item ${
-                index == 0 ? "active" : ""
-              } d-flex justify-content-center`}
-            >
-              <div className="row row-cols-1 row-cols-md-5 rows-cols-lg-5 g-4">
-                {carouselCards()}
-              </div>
+  const carouselSlides = () => {
+    let stage = [];
+    for (let index = 0; index < numberOfSlides; index++) {
+      const buildingSlide = dummyIterator.map((value, key) => {
+        return (
+          <div
+            className={`carousel-item ${
+              index == 0 ? "active" : ""
+            } d-flex justify-content-center`}
+          >
+            <div className="row row-cols-1 row-cols-md-5 rows-cols-lg-5 g-4">
+              {carouselCards()}
             </div>
           </div>
+        );
+      });
+      stage = [...stage, buildingSlide];
+      slideConstructInterval[0] = slideConstructInterval[0] + cardsPerSlide;
+      slideConstructInterval[1] = slideConstructInterval[1] + cardsPerSlide;
+    }
+    return stage;
+  };
 
+  const carouselCards = () => {
+    let subset = store.planets.slice(
+      slideConstructInterval[0],
+      slideConstructInterval[1]
+    );
+    const cardsInSlide = subset.map((value, key) => {
+      return (
+        <div className="col">
+          <div className="card">
+            <img
+              src={`https://starwars-visualguide.com/assets/img/planets/${value.uid}.jpg`}
+              className="card-img-top img-thumbnail"
+              alt="Planet Image"
+            />
+            <div className="card-body">
+              <h5 className="card-title">Name</h5>
+            </div>
+          </div>
+        </div>
+      );
+    });
+    return cardsInSlide;
+  };
+  return carouselEnsamble();
+}
 
+/* Carousel Vehicles */
 
+export function CarouselVehicles() {
+  const { store, actions } = useContext(Context);
+  const cardsPerSlide = 5;
+  const numberOfSlides = Math.ceil(store.vehicles.length / cardsPerSlide);
+  let slideConstructInterval = [0, cardsPerSlide];
+  let dummyIterator = ["dummy"];
 
+  const carouselEnsamble = () => {
+    return (
+      <div
+        id="carouselExampleFade-Vehicles"
+        className="carousel slide carousel-fade mb-lg-4"
+        data-bs-ride="carousel"
+      >
+        <div className="carousel-inner">{carouselSlides()}</div>
+        <button
+          className="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleFade-Vehicles"
+          data-bs-slide="prev"
+        >
+          <span
+            className="carousel-control-prev-icon"
+            aria-hidden="true"
+          ></span>
+          <span className="visually-hidden">Previous</span>
+        </button>
+        <button
+          className="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleFade-Vehicles"
+          data-bs-slide="next"
+        >
+          <span
+            className="carousel-control-next-icon"
+            aria-hidden="true"
+          ></span>
+          <span className="visually-hidden">Next</span>
+        </button>
+      </div>
+    );
+  };
 
+  const carouselSlides = () => {
+    let stage = [];
+    for (let index = 0; index < numberOfSlides; index++) {
+      const buildingSlide = dummyIterator.map((value, key) => {
+        return (
+          <div
+            className={`carousel-item ${
+              index == 0 ? "active" : ""
+            } d-flex justify-content-center`}
+          >
+            <div className="row row-cols-1 row-cols-md-5 rows-cols-lg-5 g-4">
+              {carouselCards()}
+            </div>
+          </div>
+        );
+      });
+      stage = [...stage, buildingSlide];
+      slideConstructInterval[0] = slideConstructInterval[0] + cardsPerSlide;
+      slideConstructInterval[1] = slideConstructInterval[1] + cardsPerSlide;
+    }
+    return stage;
+  };
 
-
-
+  const carouselCards = () => {
+    let subset = store.vehicles.slice(
+      slideConstructInterval[0],
+      slideConstructInterval[1]
+    );
+    const cardsInSlide = subset.map((value, key) => {
+      return (
+        <div className="col">
+          <div className="card">
+            <img
+              src={`https://starwars-visualguide.com/assets/img/vehicles/${value.uid}.jpg`}
+              className="card-img-top img-thumbnail"
+              alt="Vehicle Image"
+            />
+            <div className="card-body">
+              <h5 className="card-title">Name</h5>
+            </div>
+          </div>
+        </div>
+      );
+    });
+    return cardsInSlide;
+  };
+  return carouselEnsamble();
+}
 
 /* 
     <div
@@ -176,13 +367,7 @@ export function CarouselItems() {
             </div>
           </div>
         </div>
-    
-
-
         <div className="carousel-item d-flex justify-content-center">
-        
-
-
           <div className="row row-cols-1 row-cols-md-5 rows-cols-lg-5 g-4">
             <div className="col">
               <div className="card">
