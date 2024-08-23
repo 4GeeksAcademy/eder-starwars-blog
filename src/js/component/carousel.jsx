@@ -6,8 +6,24 @@ export function CarouselItems() {
   const { store, actions } = useContext(Context);
   const cardsPerSlide = 5;
   const numberOfSlides = Math.ceil(store.characters.length / cardsPerSlide);
+  const [itemDetails, setItemDetails] = useState(undefined);
   let slideConstructInterval = [0, cardsPerSlide];
   let dummyIterator = ["dummy"];
+
+  const loadSpecificData = async (id) => {
+    const URL = "https://www.swapi.tech/api/people/" + id;
+
+    try {
+      const response = await fetch(URL);
+      const data = await response.json();
+      setItemDetails(data.result);
+      console.log(itemDetails);
+      return;
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+  };
 
   useEffect(() => {
     actions.loadSomeData("people", "characters");
@@ -96,24 +112,51 @@ export function CarouselItems() {
             />
             <div className="card-body">
               <div className="p-0 m-0 text-light">
-                <h5 className="card-title">Name</h5>
-                <p className="py-0 my-0">Gender : male</p>
-                <p className="py-0 my-0"> Hair Color: none</p>
-                <p className="py-0 my-0">Eye-Color: yellow</p>
-              </div>
-              <div className="d-flex justify-content-between mt-2">
                 <button
+                  className="btn btn-dark d-flex w-100"
                   type="button"
-                  class="btn btn-light fw-bold border-3 border-primary text-primary mt-md-2"
+                  data-bs-toggle="collapse"
+                  data-bs-target={`#collapseExample${value.uid}`}
+                  aria-expanded="false"
+                  aria-controls="collapseExample"
+                  id={value.uid}
+                  onClick={(e) => {
+                    console.log(e);
+                    loadSpecificData(e.target.id);
+                  }}
                 >
-                  <Link to={`/info/people/${value.uid}`}> Learn more!</Link>
+                  <h5 className="card-title me-auto">{value.name}</h5>
+                  <span className="dropdown-toggle"></span>
                 </button>
-                <button
-                  type="button"
-                  class="btn btn-light  border-3 border-primary text-primary mt-md-2 ms-auto"
+                <div
+                  className="collapse bg-transparent text-light"
+                  id={`collapseExample${value.uid}`}
                 >
-                  <i class="fa-regular fa-heart" />
-                </button>
+                  <div className="card card-body bg-transparent text-light">
+                    <p className="py-0 my-0">
+                      Gender :
+                      {itemDetails == undefined
+                        ? ""
+                        : itemDetails.properties.gender}
+                    </p>
+                    <p className="py-0 my-0"> Hair Color: none</p>
+                    <p className="py-0 my-0">Eye-Color: yellow</p>
+                  </div>
+                  <div className="d-flex justify-content-between mt-2">
+                    <button
+                      type="button"
+                      className="btn btn-light fw-bold border-3 border-primary text-primary mt-md-2"
+                    >
+                      <Link to={`/info/people/${value.uid}`}> Learn more!</Link>
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-light  border-3 border-primary text-primary mt-md-2 ms-auto"
+                    >
+                      <i className="fa-regular fa-heart" />
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -223,15 +266,15 @@ export function CarouselPlanets() {
               <div className="d-flex justify-content-between mt-2">
                 <button
                   type="button"
-                  class="btn btn-light fw-bold border-3 border-primary text-primary mt-md-2"
+                  className="btn btn-light fw-bold border-3 border-primary text-primary mt-md-2"
                 >
                   <Link to={`/info/planets/${value.uid}`}> Learn more!</Link>
                 </button>
                 <button
                   type="button"
-                  class="btn btn-light  border-3 border-primary text-primary mt-md-2 ms-auto"
+                  className="btn btn-light  border-3 border-primary text-primary mt-md-2 ms-auto"
                 >
-                  <i class="fa-regular fa-heart" />
+                  <i className="fa-regular fa-heart" />
                 </button>
               </div>
             </div>
@@ -342,15 +385,15 @@ export function CarouselVehicles() {
               <div className="d-flex justify-content-between mt-2">
                 <button
                   type="button"
-                  class="btn btn-light fw-bold border-3 border-primary text-primary mt-md-2"
+                  className="btn btn-light fw-bold border-3 border-primary text-primary mt-md-2"
                 >
                   <Link to={`/info/vehicles/${value.uid}`}> Learn more!</Link>
                 </button>
                 <button
                   type="button"
-                  class="btn btn-light  border-3 border-primary text-primary mt-md-2 ms-auto"
+                  className="btn btn-light  border-3 border-primary text-primary mt-md-2 ms-auto"
                 >
-                  <i class="fa-regular fa-heart" />
+                  <i className="fa-regular fa-heart" />
                 </button>
               </div>
             </div>
