@@ -10,15 +10,15 @@ export function NavBar() {
           style={{ maxWidth: "100px", height: "auto" }}
         />
       </li>
-      <li className="nav-item dropdown ms-auto">
+      <li className="nav-item dropdown ms-auto  rounded-3 btn-primary">
         <a
-          className="nav-link dropdown-toggle"
+          className="nav-link  text-light fs-5"
           data-bs-toggle="dropdown"
           href="#"
           role="button"
           aria-expanded="false"
         >
-          Active
+          Favorites
         </a>
         <ul className="dropdown-menu">
           <li>

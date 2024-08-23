@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export function CarouselItems() {
@@ -28,6 +29,7 @@ export function CarouselItems() {
         <div className="carousel-inner">{carouselSlides()}</div>
         <button
           className="carousel-control-prev"
+          style={{ maxHeight: "400px" }}
           type="button"
           data-bs-target="#carouselExampleFade"
           data-bs-slide="prev"
@@ -40,6 +42,7 @@ export function CarouselItems() {
         </button>
         <button
           className="carousel-control-next"
+          style={{ maxHeight: "400px" }}
           type="button"
           data-bs-target="#carouselExampleFade"
           data-bs-slide="next"
@@ -85,14 +88,33 @@ export function CarouselItems() {
     const cardsInSlide = subset.map((value, key) => {
       return (
         <div className="col">
-          <div className="card">
+          <div className="card bg-transparent border border-light border-3">
             <img
               src={`https://starwars-visualguide.com/assets/img/characters/${value.uid}.jpg`}
               className="card-img-top img-thumbnail"
               alt="Character Image"
             />
             <div className="card-body">
-              <h5 className="card-title">Name</h5>
+              <div className="p-0 m-0 text-light">
+                <h5 className="card-title">Name</h5>
+                <p className="py-0 my-0">Gender : male</p>
+                <p className="py-0 my-0"> Hair Color: none</p>
+                <p className="py-0 my-0">Eye-Color: yellow</p>
+              </div>
+              <div className="d-flex justify-content-between mt-2">
+                <button
+                  type="button"
+                  class="btn btn-light fw-bold border-3 border-primary text-primary mt-md-2"
+                >
+                  <Link to={`/info/people/${value.uid}`}> Learn more!</Link>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-light  border-3 border-primary text-primary mt-md-2 ms-auto"
+                >
+                  <i class="fa-regular fa-heart" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -122,6 +144,7 @@ export function CarouselPlanets() {
         <div className="carousel-inner">{carouselSlides()}</div>
         <button
           className="carousel-control-prev"
+          style={{ maxHeight: "300px" }}
           type="button"
           data-bs-target="#carouselExampleFade-Planets"
           data-bs-slide="prev"
@@ -134,6 +157,7 @@ export function CarouselPlanets() {
         </button>
         <button
           className="carousel-control-next"
+          style={{ maxHeight: "300px" }}
           type="button"
           data-bs-target="#carouselExampleFade-Planets"
           data-bs-slide="next"
@@ -179,14 +203,33 @@ export function CarouselPlanets() {
     const cardsInSlide = subset.map((value, key) => {
       return (
         <div className="col">
-          <div className="card">
+          <div className="card bg-transparent border border-light border-3">
             <img
               src={`https://starwars-visualguide.com/assets/img/planets/${value.uid}.jpg`}
               className="card-img-top img-thumbnail"
               alt="Planet Image"
             />
             <div className="card-body">
-              <h5 className="card-title">Name</h5>
+              <div className="p-0 m-0 text-light">
+                <h5 className="card-title">Name</h5>
+                <p className="py-0 my-0">Climate : male</p>
+                <p className="py-0 my-0"> Gravity: none</p>
+                <p className="py-0 my-0">Diameter: yellow</p>
+              </div>
+              <div className="d-flex justify-content-between mt-2">
+                <button
+                  type="button"
+                  class="btn btn-light fw-bold border-3 border-primary text-primary mt-md-2"
+                >
+                  <Link to={`/info/planets/${value.uid}`}> Learn more!</Link>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-light  border-3 border-primary text-primary mt-md-2 ms-auto"
+                >
+                  <i class="fa-regular fa-heart" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -216,6 +259,7 @@ export function CarouselVehicles() {
         <div className="carousel-inner">{carouselSlides()}</div>
         <button
           className="carousel-control-prev"
+          style={{ maxHeight: "230px" }}
           type="button"
           data-bs-target="#carouselExampleFade-Vehicles"
           data-bs-slide="prev"
@@ -228,6 +272,7 @@ export function CarouselVehicles() {
         </button>
         <button
           className="carousel-control-next"
+          style={{ maxHeight: "230px" }}
           type="button"
           data-bs-target="#carouselExampleFade-Vehicles"
           data-bs-slide="next"
@@ -273,14 +318,33 @@ export function CarouselVehicles() {
     const cardsInSlide = subset.map((value, key) => {
       return (
         <div className="col">
-          <div className="card">
+          <div className="card bg-transparent border border-light border-3">
             <img
               src={`https://starwars-visualguide.com/assets/img/vehicles/${value.uid}.jpg`}
               className="card-img-top img-thumbnail"
               alt="Vehicle Image"
             />
             <div className="card-body">
-              <h5 className="card-title">Name</h5>
+              <div className="p-0 m-0 text-light">
+                <h5 className="card-title">Name</h5>
+                <p className="py-0 my-0">Class : male</p>
+                <p className="py-0 my-0">Model: none</p>
+                <p className="py-0 my-0">Crew: yellow</p>
+              </div>
+              <div className="d-flex justify-content-between mt-2">
+                <button
+                  type="button"
+                  class="btn btn-light fw-bold border-3 border-primary text-primary mt-md-2"
+                >
+                  <Link to={`/info/vehicles/${value.uid}`}> Learn more!</Link>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-light  border-3 border-primary text-primary mt-md-2 ms-auto"
+                >
+                  <i class="fa-regular fa-heart" />
+                </button>
+              </div>
             </div>
           </div>
         </div>

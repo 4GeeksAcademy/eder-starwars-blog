@@ -15,7 +15,7 @@ const Layout = () => {
       <BrowserRouter basename={basename}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/info" element={<Info />} />
+          <Route path="/info/:type/:id" element={<Info />} />
           <Route path="*" element={<h1>Not found!</h1>} />
         </Routes>
       </BrowserRouter>
