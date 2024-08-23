@@ -88,7 +88,7 @@ export function CarouselItems() {
     const cardsInSlide = subset.map((value, key) => {
       return (
         <div className="col">
-          <div className="card bg-transparent border border-light border-3">
+          <div className="card bg-transparent border border-light border-3 h-100">
             <img
               src={`https://starwars-visualguide.com/assets/img/characters/${value.uid}.jpg`}
               className="card-img-top img-thumbnail"
@@ -196,6 +196,9 @@ export function CarouselPlanets() {
   };
 
   const carouselCards = () => {
+    const addDefaultImg = (ev) => {
+      ev.target.src = "https://i.postimg.cc/bNhMznBH/4043.png";
+    };
     let subset = store.planets.slice(
       slideConstructInterval[0],
       slideConstructInterval[1]
@@ -203,10 +206,11 @@ export function CarouselPlanets() {
     const cardsInSlide = subset.map((value, key) => {
       return (
         <div className="col">
-          <div className="card bg-transparent border border-light border-3">
+          <div className="card bg-transparent border border-light border-3 h-100">
             <img
               src={`https://starwars-visualguide.com/assets/img/planets/${value.uid}.jpg`}
-              className="card-img-top img-thumbnail"
+              onError={addDefaultImg}
+              className="card-img-top img-fluid"
               alt="Planet Image"
             />
             <div className="card-body">
@@ -311,6 +315,9 @@ export function CarouselVehicles() {
   };
 
   const carouselCards = () => {
+    const addDefaultImg = (ev) => {
+      ev.target.src = "https://i.postimg.cc/gJbyvVRg/4047.png";
+    };
     let subset = store.vehicles.slice(
       slideConstructInterval[0],
       slideConstructInterval[1]
@@ -318,10 +325,11 @@ export function CarouselVehicles() {
     const cardsInSlide = subset.map((value, key) => {
       return (
         <div className="col">
-          <div className="card bg-transparent border border-light border-3">
+          <div className="card bg-transparent border border-light border-3 h-100">
             <img
               src={`https://starwars-visualguide.com/assets/img/vehicles/${value.uid}.jpg`}
-              className="card-img-top img-thumbnail"
+              onError={addDefaultImg}
+              className="card-img-top img-fluid"
               alt="Vehicle Image"
             />
             <div className="card-body">

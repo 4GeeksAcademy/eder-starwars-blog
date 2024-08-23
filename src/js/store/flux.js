@@ -23,7 +23,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       loadSomeData: async (target, store) => {
-        const URL = "https://www.swapi.tech/api/" + target + "/";
+        const URL = "https://www.swapi.tech/api/" + target + "?page=1&limit=40";
         try {
           const response = await fetch(URL);
           const data = await response.json();
