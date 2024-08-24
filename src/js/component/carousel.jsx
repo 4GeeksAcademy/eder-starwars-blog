@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
@@ -6,25 +6,34 @@ export function CarouselItems() {
   const { store, actions } = useContext(Context);
   const cardsPerSlide = 5;
   const numberOfSlides = Math.ceil(store.characters.length / cardsPerSlide);
-  const [itemDetails, setItemDetails] = useState(undefined);
+  const [itemsDetails, setItemsDetails] = useState({
+    people: {},
+  });
+  /* const [singleItemDetail, setSingleItemDetail] = useState(); */
   let slideConstructInterval = [0, cardsPerSlide];
   let dummyIterator = ["dummy"];
 
-  const loadSpecificData = async (id) => {
-    const URL = "https://www.swapi.tech/api/people/" + id;
+  async function getDetails(type, id) {
+    if (!(id in itemsDetails)) {
+      const info = await loadSpecificData(type, id);
+      const newItemsDetails = { ...itemsDetails };
+      newItemsDetails[type][id] = info;
+      setItemsDetails(newItemsDetails);
+    }
+    return console.log(itemsDetails[type][id]);
+  }
 
+  const loadSpecificData = async (type, id) => {
+    const URL = "https://www.swapi.tech/api/" + type + "/" + id;
     try {
       const response = await fetch(URL);
       const data = await response.json();
-      setItemDetails(data.result);
-      console.log(itemDetails);
-      return;
+      return data.result;
     } catch (error) {
       console.log(error);
       return;
     }
   };
-
   useEffect(() => {
     actions.loadSomeData("people", "characters");
     actions.loadSomeData("planets", "planets");
@@ -121,8 +130,7 @@ export function CarouselItems() {
                   aria-controls="collapseExample"
                   id={value.uid}
                   onClick={(e) => {
-                    console.log(e);
-                    loadSpecificData(e.target.id);
+                    getDetails("people", e.target.id);
                   }}
                 >
                   <h5 className="card-title me-auto">{value.name}</h5>
@@ -134,13 +142,26 @@ export function CarouselItems() {
                 >
                   <div className="card card-body bg-transparent text-light">
                     <p className="py-0 my-0">
-                      Gender :
-                      {itemDetails == undefined
+                      Gender :{" "}
+                      {itemsDetails["people"][value.uid] === undefined
                         ? ""
-                        : itemDetails.properties.gender}
+                        : itemsDetails["people"][value.uid].properties.gender}
                     </p>
-                    <p className="py-0 my-0"> Hair Color: none</p>
-                    <p className="py-0 my-0">Eye-Color: yellow</p>
+                    <p className="py-0 my-0">
+                      {" "}
+                      Hair Color:{" "}
+                      {itemsDetails["people"][value.uid] === undefined
+                        ? ""
+                        : itemsDetails["people"][value.uid].properties
+                            .hair_color}
+                    </p>
+                    <p className="py-0 my-0">
+                      Eye-Color:{" "}
+                      {itemsDetails["people"][value.uid] === undefined
+                        ? ""
+                        : itemsDetails["people"][value.uid].properties
+                            .eye_color}
+                    </p>
                   </div>
                   <div className="d-flex justify-content-between mt-2">
                     <button
@@ -176,6 +197,31 @@ export function CarouselPlanets() {
   const numberOfSlides = Math.ceil(store.planets.length / cardsPerSlide);
   let slideConstructInterval = [0, cardsPerSlide];
   let dummyIterator = ["dummy"];
+
+  const [itemsDetails, setItemsDetails] = useState({
+    planets: {},
+  });
+  async function getDetails(type, id) {
+    if (!(id in itemsDetails)) {
+      const info = await loadSpecificData(type, id);
+      const newItemsDetails = { ...itemsDetails };
+      newItemsDetails[type][id] = info;
+      setItemsDetails(newItemsDetails);
+    }
+    return console.log(itemsDetails[type][id]);
+  }
+
+  const loadSpecificData = async (type, id) => {
+    const URL = "https://www.swapi.tech/api/" + type + "/" + id;
+    try {
+      const response = await fetch(URL);
+      const data = await response.json();
+      return data.result;
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+  };
 
   const carouselEnsamble = () => {
     return (
@@ -258,24 +304,65 @@ export function CarouselPlanets() {
             />
             <div className="card-body">
               <div className="p-0 m-0 text-light">
-                <h5 className="card-title">Name</h5>
-                <p className="py-0 my-0">Climate : male</p>
-                <p className="py-0 my-0"> Gravity: none</p>
-                <p className="py-0 my-0">Diameter: yellow</p>
-              </div>
-              <div className="d-flex justify-content-between mt-2">
                 <button
+                  className="btn btn-dark d-flex w-100"
                   type="button"
-                  className="btn btn-light fw-bold border-3 border-primary text-primary mt-md-2"
+                  data-bs-toggle="collapse"
+                  data-bs-target={`#collapseExample${value.uid}`}
+                  aria-expanded="false"
+                  aria-controls="collapseExample"
+                  id={value.uid}
+                  onClick={(e) => {
+                    getDetails("planets", e.target.id);
+                  }}
                 >
-                  <Link to={`/info/planets/${value.uid}`}> Learn more!</Link>
+                  <h5 className="card-title me-auto">{value.name}</h5>
+                  <span className="dropdown-toggle"></span>
                 </button>
-                <button
-                  type="button"
-                  className="btn btn-light  border-3 border-primary text-primary mt-md-2 ms-auto"
+                <div
+                  className="collapse bg-transparent text-light"
+                  id={`collapseExample${value.uid}`}
                 >
-                  <i className="fa-regular fa-heart" />
-                </button>
+                  <div className="card card-body bg-transparent text-light">
+                    <p className="py-0 my-0">
+                      Climate:{" "}
+                      {itemsDetails["planets"][value.uid] === undefined
+                        ? ""
+                        : itemsDetails["planets"][value.uid].properties.climate}
+                    </p>
+                    <p className="py-0 my-0">
+                      {" "}
+                      Gravity:{" "}
+                      {itemsDetails["planets"][value.uid] === undefined
+                        ? ""
+                        : itemsDetails["planets"][value.uid].properties.gravity}
+                    </p>
+                    <p className="py-0 my-0">
+                      Diameter:{" "}
+                      {itemsDetails["planets"][value.uid] === undefined
+                        ? ""
+                        : itemsDetails["planets"][value.uid].properties
+                            .diameter}
+                    </p>
+                  </div>
+                  <div className="d-flex justify-content-between mt-2">
+                    <button
+                      type="button"
+                      className="btn btn-light fw-bold border-3 border-primary text-primary mt-md-2"
+                    >
+                      <Link to={`/info/planets/${value.uid}`}>
+                        {" "}
+                        Learn more!
+                      </Link>
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-light  border-3 border-primary text-primary mt-md-2 ms-auto"
+                    >
+                      <i className="fa-regular fa-heart" />
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -295,6 +382,31 @@ export function CarouselVehicles() {
   const numberOfSlides = Math.ceil(store.vehicles.length / cardsPerSlide);
   let slideConstructInterval = [0, cardsPerSlide];
   let dummyIterator = ["dummy"];
+
+  const [itemsDetails, setItemsDetails] = useState({
+    vehicles: {},
+  });
+  async function getDetails(type, id) {
+    if (!(id in itemsDetails)) {
+      const info = await loadSpecificData(type, id);
+      const newItemsDetails = { ...itemsDetails };
+      newItemsDetails[type][id] = info;
+      setItemsDetails(newItemsDetails);
+    }
+    return console.log(itemsDetails[type][id]);
+  }
+
+  const loadSpecificData = async (type, id) => {
+    const URL = "https://www.swapi.tech/api/" + type + "/" + id;
+    try {
+      const response = await fetch(URL);
+      const data = await response.json();
+      return data.result;
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+  };
 
   const carouselEnsamble = () => {
     return (
@@ -377,24 +489,65 @@ export function CarouselVehicles() {
             />
             <div className="card-body">
               <div className="p-0 m-0 text-light">
-                <h5 className="card-title">Name</h5>
-                <p className="py-0 my-0">Class : male</p>
-                <p className="py-0 my-0">Model: none</p>
-                <p className="py-0 my-0">Crew: yellow</p>
-              </div>
-              <div className="d-flex justify-content-between mt-2">
                 <button
+                  className="btn btn-dark d-flex w-100"
                   type="button"
-                  className="btn btn-light fw-bold border-3 border-primary text-primary mt-md-2"
+                  data-bs-toggle="collapse"
+                  data-bs-target={`#collapseExample${value.uid}`}
+                  aria-expanded="false"
+                  aria-controls="collapseExample"
+                  id={value.uid}
+                  onClick={(e) => {
+                    getDetails("vehicles", e.target.id);
+                  }}
                 >
-                  <Link to={`/info/vehicles/${value.uid}`}> Learn more!</Link>
+                  <h5 className="card-title me-auto">{value.name}</h5>
+                  <span className="dropdown-toggle"></span>
                 </button>
-                <button
-                  type="button"
-                  className="btn btn-light  border-3 border-primary text-primary mt-md-2 ms-auto"
+                <div
+                  className="collapse bg-transparent text-light"
+                  id={`collapseExample${value.uid}`}
                 >
-                  <i className="fa-regular fa-heart" />
-                </button>
+                  <div className="card card-body bg-transparent text-light">
+                    <p className="py-0 my-0">
+                      Crew :{" "}
+                      {itemsDetails["vehicles"][value.uid] === undefined
+                        ? ""
+                        : itemsDetails["vehicles"][value.uid].properties.crew}
+                    </p>
+                    <p className="py-0 my-0">
+                      {" "}
+                      Model:{" "}
+                      {itemsDetails["vehicles"][value.uid] === undefined
+                        ? ""
+                        : itemsDetails["vehicles"][value.uid].properties.model}
+                    </p>
+                    <p className="py-0 my-0">
+                      Class:{" "}
+                      {itemsDetails["vehicles"][value.uid] === undefined
+                        ? ""
+                        : itemsDetails["vehicles"][value.uid].properties
+                            .vehicle_class}
+                    </p>
+                  </div>
+                  <div className="d-flex justify-content-between mt-2">
+                    <button
+                      type="button"
+                      className="btn btn-light fw-bold border-3 border-primary text-primary mt-md-2"
+                    >
+                      <Link to={`/info/vehicles/${value.uid}`}>
+                        {" "}
+                        Learn more!
+                      </Link>
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-light  border-3 border-primary text-primary mt-md-2 ms-auto"
+                    >
+                      <i className="fa-regular fa-heart" />
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -34,7 +34,7 @@ export function DataItem() {
     <div>We are loading..... traffic, right?</div>;
   }
 
-  if (params.type == "people") {
+  if (params.type === "people") {
     return (
       <div className="container">
         <div
@@ -44,7 +44,7 @@ export function DataItem() {
             <div className="col-md-12 col-lg-4 d-flex justify-content-center justify-content-md-center justify-content-lg-start">
               <img
                 src={`https://starwars-visualguide.com/assets/img/${
-                  params.type == "people" ? "characters" : params.type
+                  params.type === "people" ? "characters" : params.type
                 }/${params.id}.jpg`}
                 className="img-fluid rounded rounded-3 border border-light border-5 "
                 alt="..."
@@ -53,7 +53,7 @@ export function DataItem() {
             <div className="col-md-12 col-lg-8 ps-md-2 ps-lg-4">
               <div className="card-body text-center text-light ps-lg-4 ms-lg-4 ps-md-2 ms-md-2 h-100 d-flex flex-column  justify-content-center">
                 <h5 className="card-title display-3 fw-bold mb-lg-3">
-                  {itemDetails == undefined ? "" : itemDetails.properties.name}
+                  {itemDetails === undefined ? "" : itemDetails.properties.name}
                 </h5>
                 <div className="d-flex 2 mt-lg-3">
                   <p
@@ -86,13 +86,13 @@ export function DataItem() {
             <div className="col">
               <h3>Name</h3>
               <p>
-                {itemDetails == undefined ? "" : itemDetails.properties.name}
+                {itemDetails === undefined ? "" : itemDetails.properties.name}
               </p>
             </div>
             <div className="col">
               <h3>Birth Year</h3>
               <p>
-                {itemDetails == undefined
+                {itemDetails === undefined
                   ? ""
                   : itemDetails.properties.birth_year}
               </p>
@@ -100,19 +100,19 @@ export function DataItem() {
             <div className="col">
               <h3>Gender</h3>
               <p>
-                {itemDetails == undefined ? "" : itemDetails.properties.gender}
+                {itemDetails === undefined ? "" : itemDetails.properties.gender}
               </p>
             </div>
             <div className="col">
               <h3>Height</h3>
               <p>
-                {itemDetails == undefined ? "" : itemDetails.properties.height}
+                {itemDetails === undefined ? "" : itemDetails.properties.height}
               </p>
             </div>
             <div className="col">
               <h3>Skin Color</h3>
               <p>
-                {itemDetails == undefined
+                {itemDetails === undefined
                   ? ""
                   : itemDetails.properties.skin_color}
               </p>
@@ -120,7 +120,7 @@ export function DataItem() {
             <div className="col">
               <h3>Eye Color</h3>
               <p>
-                {itemDetails == undefined
+                {itemDetails === undefined
                   ? ""
                   : itemDetails.properties.eye_color}
               </p>
@@ -131,7 +131,7 @@ export function DataItem() {
     );
   }
 
-  if (params.type == "vehicles") {
+  if (params.type === "vehicles") {
     return (
       <div className="container">
         <div
@@ -141,7 +141,7 @@ export function DataItem() {
             <div className="col-md-12 col-lg-4 d-flex justify-content-center justify-content-md-center justify-content-lg-start">
               <img
                 src={`https://starwars-visualguide.com/assets/img/${
-                  params.type == "people" ? "characters" : params.type
+                  params.type === "people" ? "characters" : params.type
                 }/${params.id}.jpg`}
                 className=" rounded rounded-3 border border-light border-5 img-fluid"
                 alt="..."
@@ -150,7 +150,7 @@ export function DataItem() {
             <div className="col-md-12 col-lg-8 ps-md-2 ps-lg-4">
               <div className="card-body text-center text-light ps-lg-4 ms-lg-4 ps-md-2 ms-md-2 h-100 d-flex flex-column  justify-content-center">
                 <h5 className="card-title display-3 fw-bold mb-lg-3">
-                  {itemDetails == undefined ? "" : itemDetails.properties.name}
+                  {itemDetails === undefined ? "" : itemDetails.properties.name}
                 </h5>
                 <div className="d-flex 2 mt-lg-3">
                   <p
@@ -183,13 +183,13 @@ export function DataItem() {
             <div className="col">
               <h3>Name</h3>
               <p>
-                {itemDetails == undefined ? "" : itemDetails.properties.name}
+                {itemDetails === undefined ? "" : itemDetails.properties.name}
               </p>
             </div>
             <div className="col">
               <h3>Class</h3>
               <p>
-                {itemDetails == undefined
+                {itemDetails === undefined
                   ? ""
                   : itemDetails.properties.vehicle_class}
               </p>
@@ -197,13 +197,13 @@ export function DataItem() {
             <div className="col">
               <h3>Model</h3>
               <p>
-                {itemDetails == undefined ? "" : itemDetails.properties.model}
+                {itemDetails === undefined ? "" : itemDetails.properties.model}
               </p>
             </div>
             <div className="col">
               <h3>Cost</h3>
               <p>
-                {itemDetails == undefined
+                {itemDetails === undefined
                   ? ""
                   : itemDetails.properties.cost_in_credits}
               </p>
@@ -211,13 +211,13 @@ export function DataItem() {
             <div className="col">
               <h3>Crew</h3>
               <p>
-                {itemDetails == undefined ? "" : itemDetails.properties.crew}
+                {itemDetails === undefined ? "" : itemDetails.properties.crew}
               </p>
             </div>
             <div className="col">
               <h3>Max Speed</h3>
               <p>
-                {itemDetails == undefined
+                {itemDetails === undefined
                   ? ""
                   : itemDetails.properties.max_atmosphering_speed}
               </p>
@@ -227,7 +227,7 @@ export function DataItem() {
       </div>
     );
   }
-  if (params.type == "planets") {
+  if (params.type === "planets") {
     return (
       <div className="container">
         <div
@@ -237,7 +237,7 @@ export function DataItem() {
             <div className="col-md-12 col-lg-4 d-flex justify-content-center justify-content-md-center justify-content-lg-start">
               <img
                 src={`https://starwars-visualguide.com/assets/img/${
-                  params.type == "people" ? "characters" : params.type
+                  params.type === "people" ? "characters" : params.type
                 }/${params.id}.jpg`}
                 className="img-fluid rounded rounded-3 border border-light border-5 "
                 alt="..."
@@ -246,7 +246,7 @@ export function DataItem() {
             <div className="col-md-12 col-lg-8 ps-md-2 ps-lg-4">
               <div className="card-body text-center text-light ps-lg-4 ms-lg-4 ps-md-2 ms-md-2 h-100 d-flex flex-column  justify-content-center">
                 <h5 className="card-title display-3 fw-bold mb-lg-3">
-                  {itemDetails == undefined ? "" : itemDetails.properties.name}
+                  {itemDetails === undefined ? "" : itemDetails.properties.name}
                 </h5>
                 <div className="d-flex 2 mt-lg-3">
                   <p
@@ -279,25 +279,29 @@ export function DataItem() {
             <div className="col">
               <h3>Name</h3>
               <p>
-                {itemDetails == undefined ? "" : itemDetails.properties.name}
+                {itemDetails === undefined ? "" : itemDetails.properties.name}
               </p>
             </div>
             <div className="col">
               <h3>Climate</h3>
               <p>
-                {itemDetails == undefined ? "" : itemDetails.properties.climate}
+                {itemDetails === undefined
+                  ? ""
+                  : itemDetails.properties.climate}
               </p>
             </div>
             <div className="col">
               <h3>Gravity</h3>
               <p>
-                {itemDetails == undefined ? "" : itemDetails.properties.gravity}
+                {itemDetails === undefined
+                  ? ""
+                  : itemDetails.properties.gravity}
               </p>
             </div>
             <div className="col">
               <h3>Diameter</h3>
               <p>
-                {itemDetails == undefined
+                {itemDetails === undefined
                   ? ""
                   : itemDetails.properties.diameter}
               </p>
@@ -305,7 +309,7 @@ export function DataItem() {
             <div className="col">
               <h3>Rotation Period</h3>
               <p>
-                {itemDetails == undefined
+                {itemDetails === undefined
                   ? ""
                   : itemDetails.properties.rotation_period}
               </p>
@@ -313,7 +317,7 @@ export function DataItem() {
             <div className="col">
               <h3>Population</h3>
               <p>
-                {itemDetails == undefined
+                {itemDetails === undefined
                   ? ""
                   : itemDetails.properties.population}
               </p>
