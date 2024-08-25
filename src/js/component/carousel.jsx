@@ -292,6 +292,7 @@ export function CarouselPlanets() {
       slideConstructInterval[0],
       slideConstructInterval[1]
     );
+    //console.log(subset);
     const cardsInSlide = subset.map((value, key) => {
       return (
         <div className="col">
@@ -308,7 +309,7 @@ export function CarouselPlanets() {
                   className="btn btn-dark d-flex w-100"
                   type="button"
                   data-bs-toggle="collapse"
-                  data-bs-target={`#collapseExample${value.uid}`}
+                  data-bs-target={`#collapseExamplePlanets${value.uid}`}
                   aria-expanded="false"
                   aria-controls="collapseExample"
                   id={value.uid}
@@ -321,7 +322,7 @@ export function CarouselPlanets() {
                 </button>
                 <div
                   className="collapse bg-transparent text-light"
-                  id={`collapseExample${value.uid}`}
+                  id={`collapseExamplePlanets${value.uid}`}
                 >
                   <div className="card card-body bg-transparent text-light">
                     <p className="py-0 my-0">
@@ -358,6 +359,15 @@ export function CarouselPlanets() {
                     <button
                       type="button"
                       className="btn btn-light  border-3 border-primary text-primary mt-md-2 ms-auto"
+                      id={value.uid}
+                      onClick={(e) => {
+                        actions.saveLikedCards(
+                          e.target.id,
+                          "planets",
+                          itemsDetails["planets"][value.uid].properties.name
+                        );
+                        console.log(store.liked);
+                      }}
                     >
                       <i className="fa-regular fa-heart" />
                     </button>
@@ -493,7 +503,7 @@ export function CarouselVehicles() {
                   className="btn btn-dark d-flex w-100"
                   type="button"
                   data-bs-toggle="collapse"
-                  data-bs-target={`#collapseExample${value.uid}`}
+                  data-bs-target={`#collapseExampleVehicles${value.uid}`}
                   aria-expanded="false"
                   aria-controls="collapseExample"
                   id={value.uid}
@@ -506,7 +516,7 @@ export function CarouselVehicles() {
                 </button>
                 <div
                   className="collapse bg-transparent text-light"
-                  id={`collapseExample${value.uid}`}
+                  id={`collapseExampleVehicles${value.uid}`}
                 >
                   <div className="card card-body bg-transparent text-light">
                     <p className="py-0 my-0">

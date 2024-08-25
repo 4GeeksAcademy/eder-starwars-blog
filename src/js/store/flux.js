@@ -16,10 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       characters: [],
       planets: [],
       vehicles: [],
-      detailspeople: [],
-      detailsplanets: [],
-      detailsvehicles: [],
-      loading: [],
+      liked: [],
     },
     actions: {
       loadSomeData: async (target, store) => {
@@ -32,6 +29,20 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.log(error);
           return;
+        }
+      },
+
+      saveLikedCards: (id, type, str) => {
+        const store = getStore();
+        if (!(id in store.liked)) {
+          console.log("inside");
+          const newVal = [
+            ...store.liked,
+            { id: id, name: str, type: type, key: id + type },
+          ];
+          setStore({
+            liked: newVal,
+          });
         }
       },
       changeColor: (index, color) => {
