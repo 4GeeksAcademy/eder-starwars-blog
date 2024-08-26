@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { NavBar } from "../component/navbar.jsx";
 import { DataItem } from "../component/dataItem.jsx";
-import { Link, useParams } from "react-router-dom";
-import { Context } from "../store/appContext";
 
 export function Info() {
   return (

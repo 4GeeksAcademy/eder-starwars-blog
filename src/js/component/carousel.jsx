@@ -9,7 +9,7 @@ export function CarouselItems() {
   const [itemsDetails, setItemsDetails] = useState({
     people: {},
   });
-  /* const [singleItemDetail, setSingleItemDetail] = useState(); */
+
   let slideConstructInterval = [0, cardsPerSlide];
   let dummyIterator = ["dummy"];
 
@@ -54,7 +54,7 @@ export function CarouselItems() {
         <div className="carousel-inner">{carouselSlides()}</div>
         <button
           className="carousel-control-prev"
-          style={{ maxHeight: "400px" }}
+          style={{ maxHeight: "350px" }}
           type="button"
           data-bs-target="#carouselExampleFade"
           data-bs-slide="prev"
@@ -67,7 +67,7 @@ export function CarouselItems() {
         </button>
         <button
           className="carousel-control-next"
-          style={{ maxHeight: "400px" }}
+          style={{ maxHeight: "350px" }}
           type="button"
           data-bs-target="#carouselExampleFade"
           data-bs-slide="next"
@@ -166,15 +166,50 @@ export function CarouselItems() {
                   <div className="d-flex justify-content-between mt-2">
                     <button
                       type="button"
-                      className="btn btn-light fw-bold border-3 border-primary text-primary mt-md-2"
+                      className={`btn  fw-bold border-3 border-primary btn-dark mt-md-2`}
+                      onMouseEnter={(e) => {
+                        e.stopPropagation;
+                        e.target.classList.value =
+                          "btn  fw-bold border-3 border-primary btn-light mt-md-2 ";
+                        console.log(e);
+                      }}
+                      onMouseLeave={(e) => {
+                        e.stopPropagation;
+                        e.target.classList.value =
+                          "btn  fw-bold border-3 border-primary btn-dark mt-md-2 ";
+                      }}
                     >
-                      <Link to={`/info/people/${value.uid}`}> Learn more!</Link>
+                      <Link
+                        to={`/info/people/${value.uid}`}
+                        style={{ textDecoration: "none" }}
+                      >
+                        {" "}
+                        Learn more!
+                      </Link>
                     </button>
                     <button
                       type="button"
-                      className="btn btn-light  border-3 border-primary text-primary mt-md-2 ms-auto"
+                      className="btn btn-dark  border-3 border-primary  mt-md-2 ms-auto"
+                      id={value.uid}
+                      onMouseEnter={(e) => {
+                        e.stopPropagation;
+                        e.target.classList.value =
+                          "btn  fw-bold border-3 border-primary btn-light mt-md-2 ";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.stopPropagation;
+                        e.target.classList.value =
+                          "btn  fw-bold border-3 border-primary btn-dark mt-md-2 ";
+                      }}
+                      onClick={(e) => {
+                        actions.saveLikedCards(
+                          e.target.id,
+                          "people",
+                          itemsDetails["people"][value.uid].properties.name
+                        );
+                      }}
                     >
-                      <i className="fa-regular fa-heart" />
+                      <i className="fa-regular fa-heart" id={value.uid} />
                     </button>
                   </div>
                 </div>
@@ -233,7 +268,7 @@ export function CarouselPlanets() {
         <div className="carousel-inner">{carouselSlides()}</div>
         <button
           className="carousel-control-prev"
-          style={{ maxHeight: "300px" }}
+          style={{ maxHeight: "250px" }}
           type="button"
           data-bs-target="#carouselExampleFade-Planets"
           data-bs-slide="prev"
@@ -246,7 +281,7 @@ export function CarouselPlanets() {
         </button>
         <button
           className="carousel-control-next"
-          style={{ maxHeight: "300px" }}
+          style={{ maxHeight: "250px" }}
           type="button"
           data-bs-target="#carouselExampleFade-Planets"
           data-bs-slide="next"
@@ -349,17 +384,41 @@ export function CarouselPlanets() {
                   <div className="d-flex justify-content-between mt-2">
                     <button
                       type="button"
-                      className="btn btn-light fw-bold border-3 border-primary text-primary mt-md-2"
+                      className={`btn  fw-bold border-3 border-primary btn-dark mt-md-2`}
+                      onMouseEnter={(e) => {
+                        e.stopPropagation;
+                        e.target.classList.value =
+                          "btn  fw-bold border-3 border-primary btn-light mt-md-2 ";
+                        console.log(e);
+                      }}
+                      onMouseLeave={(e) => {
+                        e.stopPropagation;
+                        e.target.classList.value =
+                          "btn  fw-bold border-3 border-primary btn-dark mt-md-2 ";
+                      }}
                     >
-                      <Link to={`/info/planets/${value.uid}`}>
+                      <Link
+                        to={`/info/planets/${value.uid}`}
+                        style={{ textDecoration: "none" }}
+                      >
                         {" "}
                         Learn more!
                       </Link>
                     </button>
                     <button
                       type="button"
-                      className="btn btn-light  border-3 border-primary text-primary mt-md-2 ms-auto"
+                      className="btn btn-dark  border-3 border-primary  mt-md-2 ms-auto"
                       id={value.uid}
+                      onMouseEnter={(e) => {
+                        e.stopPropagation;
+                        e.target.classList.value =
+                          "btn  fw-bold border-3 border-primary btn-light mt-md-2 ";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.stopPropagation;
+                        e.target.classList.value =
+                          "btn  fw-bold border-3 border-primary btn-dark mt-md-2 ";
+                      }}
                       onClick={(e) => {
                         actions.saveLikedCards(
                           e.target.id,
@@ -428,7 +487,7 @@ export function CarouselVehicles() {
         <div className="carousel-inner">{carouselSlides()}</div>
         <button
           className="carousel-control-prev"
-          style={{ maxHeight: "230px" }}
+          style={{ maxHeight: "180px" }}
           type="button"
           data-bs-target="#carouselExampleFade-Vehicles"
           data-bs-slide="prev"
@@ -441,7 +500,7 @@ export function CarouselVehicles() {
         </button>
         <button
           className="carousel-control-next"
-          style={{ maxHeight: "230px" }}
+          style={{ maxHeight: "180px" }}
           type="button"
           data-bs-target="#carouselExampleFade-Vehicles"
           data-bs-slide="next"
@@ -543,16 +602,49 @@ export function CarouselVehicles() {
                   <div className="d-flex justify-content-between mt-2">
                     <button
                       type="button"
-                      className="btn btn-light fw-bold border-3 border-primary text-primary mt-md-2"
+                      className={`btn  fw-bold border-3 border-primary btn-dark mt-md-2`}
+                      onMouseEnter={(e) => {
+                        e.stopPropagation;
+                        e.target.classList.value =
+                          "btn  fw-bold border-3 border-primary btn-light mt-md-2 ";
+                        console.log(e);
+                      }}
+                      onMouseLeave={(e) => {
+                        e.stopPropagation;
+                        e.target.classList.value =
+                          "btn  fw-bold border-3 border-primary btn-dark mt-md-2 ";
+                      }}
                     >
-                      <Link to={`/info/vehicles/${value.uid}`}>
+                      <Link
+                        to={`/info/vehicles/${value.uid}`}
+                        style={{ textDecoration: "none" }}
+                      >
                         {" "}
                         Learn more!
                       </Link>
                     </button>
                     <button
                       type="button"
-                      className="btn btn-light  border-3 border-primary text-primary mt-md-2 ms-auto"
+                      className="btn btn-dark  border-3 border-primary  mt-md-2 ms-auto"
+                      id={value.uid}
+                      onMouseEnter={(e) => {
+                        e.stopPropagation;
+                        e.target.classList.value =
+                          "btn  fw-bold border-3 border-primary btn-light mt-md-2 ";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.stopPropagation;
+                        e.target.classList.value =
+                          "btn  fw-bold border-3 border-primary btn-dark mt-md-2 ";
+                      }}
+                      onClick={(e) => {
+                        actions.saveLikedCards(
+                          e.target.id,
+                          "vehicles",
+                          itemsDetails["vehicles"][value.uid].properties.name
+                        );
+                        console.log(store.liked);
+                      }}
                     >
                       <i className="fa-regular fa-heart" />
                     </button>
@@ -568,168 +660,3 @@ export function CarouselVehicles() {
   };
   return carouselEnsamble();
 }
-
-/* 
-    <div
-      id="carouselExampleFade"
-      className="carousel slide carousel-fade"
-      data-bs-ride="carousel"
-    >
-      <div className="carousel-inner">
-        <div className="carousel-item active d-flex justify-content-center">
-        
-
-          <div className="row row-cols-1 row-cols-md-5 rows-cols-lg-5 g-4">
-            <div className="col">
-              <div className="card">
-                <img
-                  src="https://starwars-visualguide.com/assets/img/characters/35.jpg"
-                  className="card-img-top img-thumbnail"
-                  alt="..."
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Name</h5>
-                </div>
-              </div>
-            </div>
-            <div className="col">
-              <div className="card">
-                <img
-                  src="https://starwars-visualguide.com/assets/img/characters/58.jpg"
-                  className="card-img-top img-thumbnail"
-                  alt="..."
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Name</h5>
-                  <p className="card-text">Gender: XX</p>
-                  <p className="card-text">Hair Color: XX</p>
-                  <p className="card-text">Eye-Color: XX</p>
-                </div>
-              </div>
-            </div>
-            <div className="col">
-              <div className="card">
-                <img
-                  src="https://starwars-visualguide.com/assets/img/characters/10.jpg"
-                  className="card-img-top img-thumbnail"
-                  alt="..."
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Name</h5>
-                </div>
-              </div>
-            </div>
-            <div className="col">
-              <div className="card">
-                <img
-                  src="https://starwars-visualguide.com/assets/img/characters/10.jpg"
-                  className="card-img-top img-thumbnail"
-                  alt="..."
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Name</h5>
-                </div>
-              </div>
-            </div>
-            <div className="col">
-              <div className="card">
-                <img
-                  src="https://starwars-visualguide.com/assets/img/characters/58.jpg"
-                  className="card-img-top img-thumbnail"
-                  alt="..."
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Name</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="carousel-item d-flex justify-content-center">
-          <div className="row row-cols-1 row-cols-md-5 rows-cols-lg-5 g-4">
-            <div className="col">
-              <div className="card">
-                <img
-                  src="https://starwars-visualguide.com/assets/img/characters/20.jpg"
-                  className="card-img-top img-thumbnail"
-                  alt="..."
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Name</h5>
-                </div>
-              </div>
-            </div>
-            <div className="col">
-              <div className="card">
-                <img
-                  src="https://starwars-visualguide.com/assets/img/characters/20.jpg"
-                  className="card-img-top img-thumbnail"
-                  alt="..."
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Name</h5>
-                  <p className="card-text">Gender: XX</p>
-                  <p className="card-text">Hair Color: XX</p>
-                  <p className="card-text">Eye-Color: XX</p>
-                </div>
-              </div>
-            </div>
-            <div className="col">
-              <div className="card">
-                <img
-                  src="https://starwars-visualguide.com/assets/img/characters/20.jpg"
-                  className="card-img-top img-thumbnail"
-                  alt="..."
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Name</h5>
-                </div>
-              </div>
-            </div>
-            <div className="col">
-              <div className="card">
-                <img
-                  src="https://starwars-visualguide.com/assets/img/characters/35.jpg"
-                  className="card-img-top img-thumbnail"
-                  alt="..."
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Name</h5>
-                </div>
-              </div>
-            </div>
-            <div className="col">
-              <div className="card">
-                <img
-                  src="https://starwars-visualguide.com/assets/img/characters/35.jpg"
-                  className="card-img-top img-thumbnail"
-                  alt="..."
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Name</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>     
-      </div>
-      <button
-        className="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleFade"
-        data-bs-slide="prev"
-      >
-        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Previous</span>
-      </button>
-      <button
-        className="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleFade"
-        data-bs-slide="next"
-      >
-        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Next</span>
-      </button>
-    </div>
- */

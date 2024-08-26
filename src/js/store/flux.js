@@ -43,8 +43,19 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({
             liked: newVal,
           });
+          console.log(store.liked);
         }
       },
+
+      deleteLikedCards: (keyValue) => {
+        const store = getStore();
+        const storeLiked = store.liked;
+        const updatedLiked = storeLiked.filter(
+          (element) => element.key !== keyValue
+        );
+        setStore({ liked: updatedLiked });
+      },
+
       changeColor: (index, color) => {
         //get the store
         const store = getStore();
